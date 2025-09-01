@@ -31,5 +31,5 @@ Route::get('/form', function () {
     return view('home');
 });
 
-Route::post('/form-submit', [post::class, 'store'])->name('form.store');
+Route::post('/form-submit', [post::class, 'store']);
 
