@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\post;
 use App\Http\Controllers\test;
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use APP\Http\Controllers\UserController;
 
@@ -36,6 +37,4 @@ Route::post('/form-submit', [post::class, 'store']);
 
 Route::get('/products', [post::class, 'index']);
 
-Route::get('/brands', function(){
-    return view('brands');
-});
+Route::get('/brands', [BrandController::class, 'index']);
