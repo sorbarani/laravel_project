@@ -35,3 +35,7 @@ Route::get('/form', function () {
 Route::post('/form-submit', [post::class, 'store']);
 
 Route::get('/products', [post::class, 'index']);
+
+Route::get('/brands', function(){
+    return view('brands');
+});
