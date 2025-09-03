@@ -11,11 +11,18 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>action</th>
         </tr>
         @foreach($brands as $brand)
         <tr>
             <td>{{ $brand->id }}</td>
             <td>{{ $brand->name }}</td>
+            <td>
+                <form action='/brand-delete' methode='post'>
+                    <input type='hidden' name="name" value="{{ $brand->name }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </table>
