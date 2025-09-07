@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use APP\Http\Controllers\UserController;
 use App\Models\Brand;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,10 +47,12 @@ Route::get('/brand-update', function(){
     return view('brand-update');
 });
 
-
 Route::get('/brands-list', [BrandController::class, 'index']);
-Route::post('/brand-submit',[BrandController::class, 'store']);
-Route::post('/brand-update',[BrandController::class, 'update']);
-Route::get('/brand-delete',[BrandController::class, 'delete']);
 
-Route::get('/test/{brand}', [BrandController::class, 'show']);
+Route::post('/brand-submit',[BrandController::class, 'store']);
+
+Route::post('/brand-update',[BrandController::class, 'update']);
+
+Route::get('/brand-delete/{brand}',[BrandController::class, 'delete']);
+
+Route::get('/brand/{brand}', [BrandController::class, 'show']);

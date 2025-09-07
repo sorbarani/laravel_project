@@ -18,8 +18,8 @@
             <td>{{ $brand->id }}</td>
             <td>{{ $brand->name }}</td>
             <td>
-                <form action='/brand-delete' methode='post'>
-                    <input type='hidden' name="name" value="{{ $brand->name }}">
+                    <form action='/brand-delete/{{ $brand->id}}' methode='post'>
+                    <input type='hidden' name="name">
                     <button type="submit">Delete</button>
                 </form>
             </td>

@@ -32,12 +32,15 @@ class BrandController extends Controller
         ]);
     }
 
-    public function delete(Request $request)
+    public function delete(Brand $brand)
     {
-        $array = request();
+        // $array = request();
 
-        Brand::where('name', $array['name'])->delete();
-        echo $array['name']."Deleted";
+        // dd($brand);
+
+        // Brand::where('name', $array['name'])->delete();
+        $brand->delete();
+        echo "Deleted";
     }
 
     public function update(Product $product)
@@ -60,8 +63,11 @@ class BrandController extends Controller
         
     }
 
-    public function show(Product $product)
+    public function show(Brand $brand)
     {
-        return view('index', compact('product'));
+        // dd($brand);
+        $brand->delete();
+        echo "Deleted";
+        // return view('index', compact('product'));
     }
 }
