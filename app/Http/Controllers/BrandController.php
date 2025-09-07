@@ -18,6 +18,11 @@ class BrandController extends Controller
     {
         //store the user input
         $array =  request();
+
+        $array->validate([
+            'name' => 'string|min:2|max:20|unique:brand'
+        ]);
+
         echo "<br>";
         echo "name :" . $array["name"] ."Created". "<br>";
 
@@ -37,6 +42,10 @@ class BrandController extends Controller
     public function update()
     {
         $array = request();
+        
+        $array->validate([
+            'name' => 'string|min:2|max:20|unique:brand'
+        ]);
 
         echo "Previous name: ".$array['name']."<br>";
         echo "New name: ".$array['new_name']."<br>";
@@ -47,5 +56,10 @@ class BrandController extends Controller
         echo "<br>";
         echo "Updated";
         
+    }
+
+    public function show(Brand $brand)
+    {
+        echo "hello";
     }
 }

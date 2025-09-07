@@ -5,6 +5,7 @@ use App\Http\Controllers\test;
 use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use APP\Http\Controllers\UserController;
+use App\Models\Brand;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,5 @@ Route::get('/brands-list', [BrandController::class, 'index']);
 Route::post('/brand-submit',[BrandController::class, 'store']);
 Route::post('/brand-update',[BrandController::class, 'update']);
 Route::get('/brand-delete',[BrandController::class, 'delete']);
+
+Route::get('/test/{brand}', [BrandController::class, 'show']);
