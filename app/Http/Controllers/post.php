@@ -33,5 +33,4 @@ class post extends Controller
         'producer'=>$array['producer'],
         ]);
     }
-    
 }
