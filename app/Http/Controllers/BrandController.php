@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Product;
 
 class BrandController extends Controller
 {
@@ -39,12 +40,13 @@ class BrandController extends Controller
         echo $array['name']."Deleted";
     }
 
-    public function update()
+    public function update(Product $product)
     {
         $array = request();
         
         $array->validate([
-            'name' => 'string|min:2|max:20|unique:brand'
+            'name' => 'string|min:2|max:20|unique:brand',
+            'new_name' => 'string|min:2|max:20|unique:brand'
         ]);
 
         echo "Previous name: ".$array['name']."<br>";
@@ -58,8 +60,8 @@ class BrandController extends Controller
         
     }
 
-    public function show(Brand $brand)
+    public function show(Product $product)
     {
-        echo "hello";
+        return view('index', compact('product'));
     }
 }
