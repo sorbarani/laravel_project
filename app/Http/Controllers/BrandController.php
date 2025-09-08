@@ -43,24 +43,25 @@ class BrandController extends Controller
         echo "Deleted";
     }
 
-    public function update(Product $product)
+    public function update(Request $request, Brand $brand)
     {
-        $array = request();
-        
-        $array->validate([
-            'name' => 'string|min:2|max:20|unique:brand',
-            'new_name' => 'string|min:2|max:20|unique:brand'
+
+        echo $brand->name;
+        $validated = $request->validate([
+            'name' => 'string|min:2|max:255|unique:brand'
         ]);
 
-        echo "Previous name: ".$array['name']."<br>";
-        echo "New name: ".$array['new_name']."<br>";
-
-        Brand::where('name', $array['name'])
-            ->update(['name' => $array['new_name']]);
+        $brand->update($validated);
+        
 
         echo "<br>";
         echo "Updated";
         
+    }
+
+    public function edit(Brand $brand)
+    {
+        return view('brand-update', compact($brand));
     }
 
     public function show(Brand $brand)

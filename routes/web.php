@@ -43,15 +43,17 @@ Route::get('/products', [post::class, 'index']);
 Route::get('/brands-form', function(){
     return view('brands-form');
 });
-Route::get('/brand-update', function(){
-    return view('brand-update');
+Route::get('/brand-update/{brand}', function(Brand $brand){
+    return view('brand-update', compact('brand'));
 });
 
 Route::get('/brands-list', [BrandController::class, 'index']);
 
 Route::post('/brand-submit',[BrandController::class, 'store']);
 
-Route::post('/brand-update',[BrandController::class, 'update']);
+Route::get('/brands/{brand}/edit', [BrandController::class, 'edit'])->name('brand.edit');
+
+Route::post('/update/{brand}',[BrandController::class, 'update'])->name('brand.update');
 
 Route::get('/brand-delete/{brand}',[BrandController::class, 'delete']);
 

@@ -10,15 +10,12 @@
 <body>
     <h1>Insert a new brand.</h1>
 
-    <form action="/brand-update" method="post">
+    <form action="/update/{{$brand->id}}" method="post">
         @CSRF
-        <lablel for="name">Name of brand you want to change it:</lablel>
-        <input type="text" id="name" name="name" placeholder="Type your product name">
+        <label for="name">New brand Name:</label>
+        <input type="text" id="name" name="name"  placeholder="New name">
         <br>
-        <label for="new_name">New brand Name</label>
-        <input type="text" id="new_name" name="new_name" placeholder="New name">
-        <br>
-        <button type="submit">Submit</butto>
+        <button type="submit">Submit</button>
     </form>
 </body>
 
