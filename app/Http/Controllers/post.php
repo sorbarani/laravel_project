@@ -10,7 +10,7 @@ class post extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('index', compact('products'));
+        return view('products', compact('products'));
     }
 
     public function store(Request $request)
