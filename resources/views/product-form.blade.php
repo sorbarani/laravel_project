@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    <h1>Welcome to our website.</h1>
-    <p>We build great website.</p>
+    <h1>Add a product.</h1>
+    <hr style="color: red;">
 
     <form action="/form-submit" method="post">
         @CSRF
