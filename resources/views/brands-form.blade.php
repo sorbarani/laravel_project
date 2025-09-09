@@ -8,13 +8,23 @@
 </head>
 
 <body>
-    <h1>Insert  a new brand.</h1>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <h1>Insert a new brand.</h1>
 
     <form action="/brand-submit" method="post">
         @CSRF
         <lablel for="name">Name of brand:</lablel>
         <input type="text" id="name" name="name" placeholder="Type your product name">
-       <br>
+        <br>
         <button type="submit">Submit</butto>
     </form>
 </body>
