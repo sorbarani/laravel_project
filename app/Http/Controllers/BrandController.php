@@ -47,11 +47,12 @@ class BrandController extends Controller
     {
 
         echo $brand->name;
+
         $validated = $request->validate([
-            'name' => 'string|min:2|max:255|unique:brand'
+            'name' => 'required|string|min:2|max:255|unique:brand'
         ]);
 
-        $brand->update($validated);
+        $brand->update($request->all());
         
 
         echo "<br>";
