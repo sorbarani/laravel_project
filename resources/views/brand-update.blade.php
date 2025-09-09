@@ -8,12 +8,22 @@
 </head>
 
 <body>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <h1>Insert a new brand.</h1>
 
     <form action="/update/{{$brand->id}}" method="post">
         @CSRF
         <label for="name">New brand Name:</label>
-        <input type="text" id="name" name="name"  placeholder="New name">
+        <input type="text" id="name" name="name" placeholder="New name">
         <br>
         <button type="submit">Submit</button>
     </form>
