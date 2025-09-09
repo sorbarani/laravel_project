@@ -24,11 +24,6 @@ Route::get('/', function(){
 });
 
 Route::get('/hello/{name}', [test::class, 'show']);
-// Route::get('/hello/{name}', [UserController::class, 'show']);
-
-// Route::get('/hello/{name?}', function($name =" "){
-//     return "hello $name";
-// });
 
 Route::get('/form', function () {
     return view('home');
