@@ -23,16 +23,15 @@ Route::get('/', function(){
     return view('welcome');
 });
 
-Route::get('/hello/{name}', [test::class, 'show']);
+//Products Routes
+Route::get('/products', [post::class, 'index']);
 
-Route::get('/form', function () {
-    return view('home');
+Route::get('/product-form', function () {
+    return view('product-form');
 });
 
-// Route::get('/index', [post::class, 'index']);
-Route::post('/form-submit', [post::class, 'store']);
-
-Route::get('/products', [post::class, 'index']);
+Route::post('/product-submit', [post::class, 'store']);
+/* End */
 
 //Brands routes
 Route::get('/brands-form', function(){
