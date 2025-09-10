@@ -25,13 +25,13 @@ class post extends Controller
         echo "name :".$array["product"]."<br>";
         echo "price :".$array["price"]."<br>";
         echo "date :".$array["date"]."<br>";
-        echo "producer :".$array["producer"]."<br>";
+        echo "brand_id:".$array["brand_id"]."<br>";
 
         Product::create([
         'name'=>$array['product'],
         'price'=>$array['price'],
         'created_at'=>$array['date'],
-        'producer'=>$array['producer'],
+        'brand_id'=>$array['brand_id']
         ]);
     }
 }
