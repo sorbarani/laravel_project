@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['name', 'price', 'created_at', 'producer'];
+    protected $fillable = ['name', 'price', 'created_at','brand_id'];
 
     protected $table = 'products';
     public $timestamps = false;
@@ -18,5 +18,4 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
-    
 }
