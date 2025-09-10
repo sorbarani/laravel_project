@@ -45,16 +45,12 @@ class BrandController extends Controller
 
     public function update(Request $request, Brand $brand)
     {
-
-        echo $brand->name;
-
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255|unique:brand'
         ]);
 
-        $brand->update($request->all());
+        $brand->update($validated);
         
-
         echo "<br>";
         echo "Updated";
         
