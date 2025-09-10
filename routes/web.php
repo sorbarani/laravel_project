@@ -27,7 +27,8 @@ Route::get('/', function(){
 Route::get('/products', [post::class, 'index']);
 
 Route::get('/product-form', function () {
-    return view('product-form');
+    $brand = Brand::all();
+    return view('product-form', compact('brand'));
 });
 
 Route::post('/product-submit', [post::class, 'store']);
