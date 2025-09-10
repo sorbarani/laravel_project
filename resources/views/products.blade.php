@@ -13,6 +13,7 @@
             <th>Name</th>
             <th>Price</th>
             <th>Creator</th>
+            <th>Brand</th>
         </tr>
         @foreach($products as $product)
         <tr>
@@ -20,6 +21,7 @@
             <td>{{ $product->name }}</td>
             <td>{{ $product->price }}</td>
             <td>{{$product->producer}}</td>
+            <td>{{$product->brand->name}}</td>
         </tr>
         @endforeach
     </table>

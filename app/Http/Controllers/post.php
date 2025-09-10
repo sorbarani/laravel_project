@@ -9,7 +9,8 @@ class post extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        // $products = Product::all();
+        $products = Product::with('brand')->get();
         return view('products', compact('products'));
     }
 
