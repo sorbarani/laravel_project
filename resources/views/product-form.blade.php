@@ -11,10 +11,20 @@
     <h1>Add a product.</h1>
     <hr style="color: red;">
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    
     <form action="/product-submit" method="post">
         @CSRF
-        <lablel for="product">Name of product:</lablel>
-        <input type="text" id="product" name="product" placeholder="Type your product name">
+        <lablel for="name">Name of product:</lablel>
+        <input type="text" id="name" name="name" placeholder="Type your product name">
         <br>
         <label for="price">Price:</label>
         <input type="number" id="price" name="price" min="0" step="0.01" placeholder="Enter price">
@@ -24,9 +34,9 @@
         <br>
         <lablel for="brand_id">Brand:</lablel>
         <select name='brand_id' required>
-            <option >-- Select Brand ---</option>
+            <option>-- Select Brand ---</option>
             @foreach ($brand as $item)
-                <option value="{{$item->id}}">{{$item->name}}</option>
+            <option value="{{$item->id}}">{{$item->name}}</option>
             @endforeach
         </select>
         <br>
