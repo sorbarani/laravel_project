@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <h1>All Products</h1>
+    <h1>Brands</h1>
     <table border="1" cellpadding="5">
         <tr>
             <th>ID</th>
