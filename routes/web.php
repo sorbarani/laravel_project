@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\post;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\test;
 use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
@@ -24,14 +24,14 @@ Route::get('/', function(){
 });
 
 //Products Routes
-Route::get('/products', [post::class, 'index']);
+Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/product-form', function () {
     $brand = Brand::all();
     return view('product-form', compact('brand'));
 });
 
-Route::post('/product-submit', [post::class, 'store']);
+Route::post('/product-submit', [ProductController::class, 'store']);
 /* End */
 
 //Brands routes
