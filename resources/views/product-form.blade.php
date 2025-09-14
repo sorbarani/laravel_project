@@ -12,7 +12,7 @@
     <hr style="color: red;">
 
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div style="color:red" class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -30,7 +30,7 @@
         <input type="number" id="price" name="price" min="0" step="0.01" placeholder="Enter price">
         <br>
         <label for="date">Date:</label>
-        <input type="date" id="date" name="date" placeholder="Enter date">
+        <input type="date" id="created_at" name="created_at" placeholder="Enter date">
         <br>
         <lablel for="brand_id">Brand:</lablel>
         <select name='brand_id' required>
