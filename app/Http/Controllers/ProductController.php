@@ -24,14 +24,14 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|min:1|max:255',
             'price' => 'required|numeric|min:0',
-            'date' => 'required|date',
+            'created_at' => 'required|date',
             'brand_id' => 'required|exists:brand,id',
         ]);
 
         echo "<br>";
         echo "name :".$array["name"]."<br>";
         echo "price :".$array["price"]."<br>";
-        echo "date :".$array["date"]."<br>";
+        echo "date :".$array["created_at"]."<br>";
         echo "brand_id:".$array["brand_id"]."<br>";
 
         Product::create($validated);
