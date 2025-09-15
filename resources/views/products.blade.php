@@ -20,6 +20,11 @@
             <td>{{ $product->name }}</td>
             <td>{{ $product->price }}</td>
             <td>{{$product->brand->name}}</td>
+            <td>
+                @if($product->image)
+                    <img src="{{asset('storage/'.$product->image)}}" width="100">
+                @endif
+            </td>
         </tr>
         @endforeach
     </table>
