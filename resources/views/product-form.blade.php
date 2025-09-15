@@ -21,7 +21,7 @@
     </div>
     @endif
     
-    <form action="/product-submit" method="post">
+    <form action="/product-submit" method="post" enctype="multipart/form-data">
         @CSRF
         <lablel for="name">Name of product:</lablel>
         <input type="text" id="name" name="name" placeholder="Type your product name">
@@ -32,13 +32,16 @@
         <label for="date">Date:</label>
         <input type="date" id="created_at" name="created_at" placeholder="Enter date">
         <br>
-        <lablel for="brand_id">Brand:</lablel>
+        <label for="brand_id">Brand:</lablel>
         <select name='brand_id' required>
             <option>-- Select Brand ---</option>
             @foreach ($brand as $item)
             <option value="{{$item->id}}">{{$item->name}}</option>
             @endforeach
         </select>
+        <br>
+        <label for="image" >Choose a image.</label>
+        <input type="file" id="image" name="image" accept="image/*" >
         <br>
         <button type="submit">Submit</butto>
     </form>
