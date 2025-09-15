@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['name', 'price', 'created_at','brand_id'];
+    protected $fillable = ['name', 'price', 'created_at','brand_id', 'image'];
 
     protected $table = 'products';
     public $timestamps = false;
