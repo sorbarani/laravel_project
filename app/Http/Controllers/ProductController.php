@@ -26,13 +26,19 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'created_at' => 'required|date',
             'brand_id' => 'required|exists:brand,id',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:5048'
         ]);
+
+        if($request->hasFile('image')){
+            $validated['image'] = $request->file('image')->store('products', 'public');
+        }
 
         echo "<br>";
         echo "name :".$array["name"]."<br>";
         echo "price :".$array["price"]."<br>";
         echo "date :".$array["created_at"]."<br>";
         echo "brand_id:".$array["brand_id"]."<br>";
+        echo "brand_id:".$array["image"]."<br>";
 
         Product::create($validated);
     }
