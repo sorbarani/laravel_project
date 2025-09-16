@@ -22,12 +22,13 @@
             <td>{{$product->brand->name}}</td>
             <td>
                 @if($product->image)
-                    <img src="{{asset('storage/'.$product->image)}}" width="100">
+                <img src="{{asset('storage/'.$product->image)}}" width="100">
                 @endif
             </td>
         </tr>
         @endforeach
     </table>
+    {{ $products->links() }}
 </body>
 
 </html>
