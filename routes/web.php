@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\test;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use APP\Http\Controllers\UserController;
 use App\Models\Brand;
@@ -32,6 +33,7 @@ Route::get('/product-form', function () {
 });
 
 Route::post('/product-submit', [ProductController::class, 'store']);
+Route::get('/product/{product}', [OrderController::class, 'create']);
 /* End */
 
 //Brands routes
