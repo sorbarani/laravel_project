@@ -25,6 +25,15 @@
                 <img src="{{asset('storage/'.$product->image)}}" width="100">
                 @endif
             </td>
+            <td>
+                <form action='/product/{{$product->id}}' method='get'>
+                    <button type="submit">Buy</button>
+            </td>
+            <td>
+                <label for="quantity">quantity</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1">
+            </td>
+            </form>
         </tr>
         @endforeach
     </table>
