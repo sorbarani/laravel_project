@@ -19,8 +19,8 @@ class OrderProduct extends Model
         'offer_id_value',
         'offer_on_product',
         'price',
-        'quantity ',
-        'subtotal '	,
+        'quantity',
+        'subtotal'	,
         'created_at', 
         'updated_at',
     ];
