@@ -30,4 +30,9 @@ class Order extends Model
      	'deleted_at',
      	'created_at'
 	];
+
+	public function items()
+	{
+		return $this->hasmany(OrderProduct::class, 'order_id');
+	}
 }
