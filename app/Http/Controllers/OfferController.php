@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Offer;
 
 class OfferController extends Controller
 {
@@ -35,6 +36,17 @@ class OfferController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = $request->validate([
+            'name'  => 'required|string|min:1|max:255',
+            'value' => 'required|integer',
+            'base_price' => 'required|numeric|min:0',
+            'start_at' => 'required|date',
+            'end_at' => 'required|date',
+            'percent' => 'required|integer',
+            'count' => 'required|integer',
+        ]);
+
+        Offer::create($validate);        
     }
 
     /**
