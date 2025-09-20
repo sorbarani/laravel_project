@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\test;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use APP\Http\Controllers\UserController;
@@ -26,15 +27,24 @@ Route::get('/', function(){
 
 //Products Routes
 Route::get('/products', [ProductController::class, 'index']);
-
 Route::get('/product-form', function () {
     $brand = Brand::all();
     return view('product-form', compact('brand'));
 });
-
 Route::post('/product-submit', [ProductController::class, 'store']);
 Route::get('/product/{product}', [OrderController::class, 'create']);
 /* End */
+
+//Offer Routes
+Route::get('/offers', [OfferController::class , 'index'])->name('offers.index');
+Route::get('/offers/create', [OfferController::class, 'create'])->name('offers.create');
+Route::post('/offers', [OfferController::class, 'store'])->name('offers.store');
+Route::get('/offers/{offer}/edit', [OfferController::class, 'edit'])->name('offers.edit');
+Route::post('offers/{offer}', [OfferController::class, 'update'])->name('offers.update');
+Route::get('/offers/{offer}', [OfferController::class, 'destroy'])->name('offers.destroy');
+
+/* End */
+
 
 //Brands routes
 Route::get('/brands-form', function(){
