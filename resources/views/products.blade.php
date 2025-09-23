@@ -26,12 +26,12 @@
                 @endif
             </td>
             <td>
-                <form action='/product/{{$product->id}}' method='get'>
-                    <button type="submit">Buy</button>
-            </td>
-            <td>
                 <label for="quantity">quantity</label>
                 <input type="number" id="quantity" name="quantity" min="1" value="1">
+            </td>
+            <td>
+                <form action='/product/{{$product->id}}' method='get'>
+                    <button type="submit">Buy</button>
             </td>
             </form>
         </tr>
