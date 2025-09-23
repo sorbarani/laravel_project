@@ -32,8 +32,9 @@
             <td>
                 <form action='/product/{{$product->id}}' method='get'>
                     <button type="submit">Buy</button>
+                </form>
             </td>
-            </form>
+
         </tr>
         @endforeach
     </table>
