@@ -26,13 +26,12 @@ Route::get('/', function(){
 });
 
 //Products Routes
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/product-form', function () {
-    $brand = Brand::all();
-    return view('product-form', compact('brand'));
-});
-Route::post('/product-submit', [ProductController::class, 'store']);
-Route::get('/product/{product}', [OrderController::class, 'create']);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::post('products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::get('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 /* End */
 
 //Offer Routes

@@ -21,7 +21,7 @@
     </div>
     @endif
     
-    <form action="/product-submit" method="post" enctype="multipart/form-data">
+    <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
         @CSRF
         <lablel for="name">Name of product:</lablel>
         <input type="text" id="name" name="name" placeholder="Type your product name">
@@ -35,7 +35,7 @@
         <label for="brand_id">Brand:</lablel>
         <select name='brand_id' required>
             <option>-- Select Brand ---</option>
-            @foreach ($brand as $item)
+            @foreach ($brands as $item)
             <option value="{{$item->id}}">{{$item->name}}</option>
             @endforeach
         </select>

@@ -34,7 +34,6 @@
                     <button type="submit">Buy</button>
                 </form>
             </td>
-
         </tr>
         @endforeach
     </table>
