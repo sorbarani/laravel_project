@@ -15,13 +15,13 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('value');
+            $table->string('name'); // name of the offer.
+            $table->integer('value');// If the value exist we use value in payment also we use percent.
             $table->decimal('base_price', 10, 2);
-            $table->dateTime('start_at');
-            $table->dateTime('end_at');
-            $table->unsignedTinyInteger('percent');
-            $table->unsignedInteger('count')->nullable();
+            $table->dateTime('start_at'); // when the offer start.
+            $table->dateTime('end_at');  // when the offer end.
+            $table->unsignedTinyInteger('percent'); // If the percent exist we use percent in payment also we use value.
+            $table->unsignedInteger('count')->nullable();//this shows us how many time we can use the offer.
             $table->timestamps();
             $table->softDeletes();
         });
