@@ -41,9 +41,14 @@ Route::post('/offers', [OfferController::class, 'store'])->name('offers.store');
 Route::get('/offers/{offer}/edit', [OfferController::class, 'edit'])->name('offers.edit');
 Route::post('offers/{offer}', [OfferController::class, 'update'])->name('offers.update');
 Route::get('/offers/{offer}', [OfferController::class, 'destroy'])->name('offers.destroy');
-
 /* End */
 
+//Orders Routes
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::post('/orders/{product}', [OrderController::class, 'store'])->name('orders.store');
+Route::post('/orders/{order}/offer', [OrderController::class, 'set_offer'])->name('orders.setoffer');
+
+/* End */
 
 //Brands routes
 Route::get('/brands-form', function(){
