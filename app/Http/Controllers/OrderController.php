@@ -69,8 +69,6 @@ class OrderController extends Controller
     {
         //
         $offer = Offer::find($request->offer);
-        // dd($order);
-        // echo $order->id;
         $order_product = OrderProduct::find($order->id);
         
         $order_product->update([
