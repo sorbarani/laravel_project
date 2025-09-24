@@ -7,6 +7,17 @@
 
 <body>
     <h1>All Products</h1>
+
+    @if ($errors->any())
+    <div style="color:red" class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    
     <table border="1" cellpadding="5">
         <tr>
             <th>ID</th>
@@ -25,15 +36,16 @@
                 <img src="{{asset('storage/'.$product->image)}}" width="100">
                 @endif
             </td>
-            <td>
-                <label for="quantity">quantity</label>
-                <input type="number" id="quantity" name="quantity" min="1" value="1">
-            </td>
-            <td>
-                <form action='/product/{{$product->id}}' method='get'>
+            <form action="{{route('orders.store', $product->id)}}" method='post'>
+                @CSRF
+                <td>
+                    <label for="quantity">quantity</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1">
+                </td>
+                <td>
                     <button type="submit">Buy</button>
-                </form>
-            </td>
+                </td>
+            </form>
         </tr>
         @endforeach
     </table>
