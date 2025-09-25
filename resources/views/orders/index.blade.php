@@ -22,7 +22,7 @@
             <th>Address_Id</Th>
             <th>Shipment_Code</th>
             <th>Order_Type</th>
-            <th colspan="2">Set Offer On Product</th>
+            <th colspan="2">Set Offer On Order</th>
         </tr>
         @foreach($orders as $order)
         <tr>
