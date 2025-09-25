@@ -56,6 +56,8 @@
         </tr>
         @endforeach
     </table>
+    <hr>
+    <h2 style="color:brown;"><a href="{{route('products.index')}}">List of Products</a></h2>
 </body>
 
 </html>
