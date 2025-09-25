@@ -11,7 +11,6 @@ class OrderProduct extends Model
 
     protected $table = 'order_product';
     protected $fillable = [
-        'id',
         'order_id',
         'product_id',
         'sub_product',
@@ -20,9 +19,7 @@ class OrderProduct extends Model
         'offer_on_product',
         'price',
         'quantity',
-        'subtotal'	,
-        'created_at', 
-        'updated_at',
+        'subtotal'
     ];
 
     public function order()

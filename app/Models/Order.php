@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
+	use SoftDeletes;
 
     protected $table = 'orders';
 
     protected $fillable = [
-        'id',
         'user_id',
     	'status',
         'total_amount',
@@ -27,8 +27,6 @@ class Order extends Model
     	'order_type' ,
         'description', 
     	'slug',
-     	'deleted_at',
-     	'created_at'
 	];
 
 	public function items()
