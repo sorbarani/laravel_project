@@ -11,31 +11,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\OrderProductController;
 
 class OrderController extends Controller
-{
-    //
+{ 
+    //User Defined Functions
     public function get_price($quantity, $price)
     {
         return $quantity * $price;
     }
 
-    public function index()
+    public function create_order($user_id)
     {
-        $orders = Order::all();
-        $offers = Offer::all(); 
-        return view('orders.index', compact('orders', 'offers'));  
-    }
-
-    public function store(Request $request, Product $product)
-    {
-        $validate = $request->validate([
-            'quantity' => 'required|integer|min:1|max:10'
-        ]);
-
-
+        //This function create an order when user hasn't got an order in table.
         $order = Order::create([
-            'user_id' =>  2,
+            'user_id' =>  $user_id,
             'status' => 0,
-            'total_amount' => 1200,
+            'total_amount' => 0,
             'delivery_amount' => 0,
             'delivery_option_id' => null,
             'offer_amount' => 0,
@@ -45,14 +34,21 @@ class OrderController extends Controller
             'shipment_code' => null,
             'order_type' => 0,
             'description' => "",
-            'slug' => Str::random(16)
+            'slug' => Str::random(16) 
         ]);
 
-        OrderProduct::create([
+        //return the order object to the store function.
+        return $order;
+    }
+
+    public function create_order_product($order, $request, $product)
+    {
+        //Add a product to order_product table.This for products that hasn't been inserted in the table.
+        $order_product = OrderProduct::create([
             'order_id' => $order->id,
             'product_id' => $product->id,
-            'sub_product' => 0,
-            'offer_id' => 0,
+            'sub_product' => null,
+            'offer_id' => null,
             'offer_id_value'=> 0,
             'offer_on_product'=>0,
             'price' => $product->price,
@@ -60,29 +56,83 @@ class OrderController extends Controller
             'subtotal'=> $this->get_price($request->quantity, $product->price),
         ]);
 
-        // echo "Total amount is: ".$this->get_price($request->quantity, $product->price );
-
-        echo "Created";
+        //After add we have to update the total amount of orders table.
+        $order->update([
+            'total_amount' => $order->total_amount + $order_product->subtotal,
+        ]);
     }
 
-    public function set_offer(Request $request, Order $order, Offer $offer)
+
+    public function update_order($order, $request, $product)
     {
-        //
-        $offer = Offer::find($request->offer);
-        $order_product = OrderProduct::find($order->id);
+        //Get an order_product value from its table base on order_id and product_id.
+        //We use theese two keys for more accurate and safe retrieve.
+        $order_product = OrderProduct::where('order_id', $order->id)
+                                        ->where('product_id', $product->id)
+                                        ->first();
         
-        $order_product->update([
-            'offer_id' => $offer->id,
-            'offer_id_value' => $offer->value,
-            'offer_on_product' => 1,
-        ]);
+        //If the specific order_product find we update elsewhere we creat it.
+        if($order_product)
+        {
+            //Yes.
+            //newQuantity-> use for update the quantity of product and get price base on it.
+            $newQuantity = $order_product->quantity + $request->quantity;
+            $order_product->update([
+                'quantity' => $newQuantity,
+                'subtotal' => $this->get_price($newQuantity, $product->price),
+            ]);
 
-        $order->update([
-            'total_amount' => $order_product->subtotal,
-            'offer_amount' => $offer->value,
-            'paying_amount' => ($order->total_amount - $offer->value) + $order->delivery_amount,
-        ]);
+            //update total amount.
+            $order->update([
+                'total_amount' => $order->total_amount + $this->get_price($request->quantity, $product->price),
+            ]);
 
-        return redirect()->route('orders.index')->with('sccess' , 'Offer set successfully');
+        }
+        else
+        {            
+            //No
+            $this->create_order_product($order, $request, $product);
+        }
+        
+        
+    }
+
+    //CRUD Functions
+    public function index()
+    {
+        $orders = Order::all();
+        $offers = Offer::all(); 
+        return view('orders.index', compact('orders', 'offers'));  
+    }
+
+    public function store(Request $request, Product $product)
+    {
+        //This function acts like an entry point for user orders.
+        //When a user register an product we create an order and add product to order_product table.
+        //If the order already created we just update it and their products in the related order.
+
+        $user_id = 2;
+        //check the specific user has already had an order in the table.
+        //status must to be check in real scenario.
+        $order = Order::where('user_id', $user_id)->first();
+        
+        $request->validate([
+            'quantity' => 'required|integer|min:1|max:10'
+        ]);
+        
+        //If order exist we just update it otherwise we create a new order.
+        if($order)
+        {
+            //Yes
+            $this->update_order($order, $request, $product);
+            return  redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+        }
+        else
+        {
+            //No
+            $order = $this->create_order($user_id);
+            $this->create_order_product($order, $request, $product);
+            return redirect()->route('orders.index')->with('success', 'Order create successfully.');
+        }
     }
 }
