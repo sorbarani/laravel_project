@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Products</title>
+    <title>Orders</title>
 </head>
 
 <body>
