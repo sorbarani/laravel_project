@@ -71,7 +71,7 @@ class OrderController extends Controller
                                         ->where('product_id', $product->id)
                                         ->first();
         
-        //If the specific order_product find we update elsewhere we creat it.
+        //If the specific order_product find we update it if not we creat it.
         if($order_product)
         {
             //Yes.
