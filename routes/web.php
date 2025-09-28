@@ -51,21 +51,10 @@ Route::post('/orders/{order}/offer', [OrderController::class, 'set_offer'])->nam
 /* End */
 
 //Brands routes
-Route::get('/brands-form', function(){
-    return view('brands-form');
-});
-Route::get('/brand-update/{brand}', function(Brand $brand){
-    return view('brand-update', compact('brand'));
-});
-
-Route::get('/brands-list', [BrandController::class, 'index']);
-
-Route::post('/brand-submit',[BrandController::class, 'store']);
-
-Route::get('/brands/{brand}/edit', [BrandController::class, 'edit'])->name('brand.edit');
-
-Route::post('/update/{brand}',[BrandController::class, 'update'])->name('brand.update');
-
-Route::get('/brand-delete/{brand}',[BrandController::class, 'delete']);
-
-Route::get('/brand/{brand}', [BrandController::class, 'show']);
+Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
+Route::get('/brands/create', [BrandController::class, 'create'])->name('brands.create');
+Route::post('/brands', [BrandController::class, 'store'])->name('brands.store');
+Route::get('/brands/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
+Route::patch('brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
+Route::delete('brands/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
+/* End */

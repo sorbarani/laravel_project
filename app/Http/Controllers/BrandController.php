@@ -12,53 +12,45 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::all();
-        return view('brands', compact('brands'));
+        return view('brands.index', compact('brands'));
+    }
+
+    public function create()
+    {
+        return view('brands.create');
     }
 
     public function store(Request $request)
     {
-        //store the user input
-        $array =  request();
-
-        $array->validate([
+        $validate = $request->validate([
             'name' => 'string|min:2|max:20|unique:brand'
         ]);
 
-        echo "<br>";
-        echo "name :" . $array["name"] ."Created". "<br>";
+        Brand::create($validate);
 
-        Brand::create([
-            'name' => $array['name'],
-        ]);
+        return redirect()->route('brands.index')->with('success', 'Brand created successfully.');
     }
 
-    public function delete(Brand $brand)
+    public function edit(Brand $brand)
     {
-        // $array = request();
-
-        // dd($brand);
-
-        // Brand::where('name', $array['name'])->delete();
-        $brand->delete();
-        echo "Deleted";
+        return view('brands.edit', compact('brand'));      
     }
-
+    
     public function update(Request $request, Brand $brand)
     {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:255|unique:brand'
         ]);
-
+    
         $brand->update($validated);
         
-        echo "<br>";
-        echo "Updated";
-        
+        return redirect()->route('brands.index')->with('success', 'Brand updated successfully.');
     }
 
-    public function edit(Brand $brand)
+    public function destroy(Brand $brand)
     {
-        return view('brand-update', compact($brand));
+        $brand->delete();
+        return redirect()->route('brands.index')->with('success', 'Brand deleted successfully.');
     }
 
     public function show(Brand $brand)
