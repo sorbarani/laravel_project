@@ -26,20 +26,23 @@
         <lablel for="name">Name of offer:</lablel>
         <input type="text" id="name" name="name" placeholder="Type your offer name">
         <br>
-        <label for="value">value:</label>
-        <input type="number" id="value" name="value" min="0" step="0.01" placeholder="Enter value">
+        <label for="config[value]">value:</label>
+        <input type="number" id="value" name="config[value]" min="0" step="0.01" placeholder="Enter value">
         <br>
-        <label for="base_price">Base Price:</label>
-        <input type="number" id="base_price" name="base_price" min="0" step="0.01" placeholder="Price">
+        <label for="config[base_price]">Base Price:</label>
+        <input type="number" id="base_price" name="config[base_price]" min="0" step="0.01" placeholder="Price">
         <br>
-        <label for="start_at">Start at:</label>
-        <input type="datetime-local" id="start_at" name="start_at">
+        <label for="config[start_at]">Start at:</label>
+        <input type="datetime-local" id="start_at" name="config[start_at]">
         <br>
-        <label for="end_at">End at:</label>
-        <input type="datetime-local" id="end_at" name="end_at">
+        <label for="config[end_at]">End at:</label>
+        <input type="datetime-local" id="end_at" name="config[end_at]">
         <br>
-        <label for="percent">Percent:</label>
-        <input type="number" id="percent" name="percent" min="0" max="50" placeholder="Percent">
+        <label for="config[percent]">Percent:</label>
+        <input type="number" id="percent" name="config[percent]" min="0" max="50" placeholder="Percent">
+        <br>
+        <label for="token">token:</label>
+        <input type="string" id="token" name="token" min="0" max="255" placeholder="token">
         <br>
         <label for="count">Count:</label>
         <input type="number" id="count" name="count" placeholder="count">

@@ -19,18 +19,20 @@
             <th>End at</th>
             <th>Percent</th>
             <th>Count</th>
+            <th>Token</th>
             <th colspan="2">Action</th>
         </tr>
         @foreach($offers as $offer)
         <tr>
             <td>{{ $offer->id }}</td>
             <td>{{ $offer->name }}</td>
-            <td>{{ $offer->value }}</td>
-            <td>{{$offer->base_price}}</td>
-            <td>{{$offer->start_at}}</td>
-            <td>{{$offer->end_at}}</td>
-            <td>{{$offer->percent}}</td>
+            <td>{{ $offer->config['value'] ?? '-' }}</td>
+            <td>{{$offer->config['base_price']?? '-'}}</td>
+            <td>{{$offer->config['start_at']?? '-'}}</td>
+            <td>{{$offer->config['end_at']?? '-'}}</td>
+            <td>{{$offer->config['percent']?? '-'}}</td>
             <td>{{$offer->count}}</td>
+            <td>{{$offer->token}}</td>
             <td><a href="{{route('offers.destroy', $offer->id)}}">Delete</a></td>
             <td><a href="{{route('offers.edit', $offer->id)}}">Update</a></td>
         </tr>

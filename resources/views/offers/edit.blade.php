@@ -26,25 +26,27 @@
         <lablel for="name">Name of offer:</lablel>
         <input type="text" id="name" name="name" value="{{old('name', $offer->name)}}" required>
         <br>
-        <label for="value">value:</label>
-        <input type="number" id="value" name="value" min="0" step="0.01" value="{{old('name', $offer->value)}}">
+        <label for="config[value]">value:</label>
+        <input type="number" id="value" name="config[value]" min="0" step="0.01" value="{{old('config.value', $offer->config['value'])}}">
         <br>
-        <label for="base_price">Base Price:</label>
-        <input type="number" id="base_price" name="base_price" min="0" step="0.01" value="{{old('name', $offer->base_price)}}">
+        <label for="config[base_price]">Base Price</label>
+        <input type="number" id="base_price" name="config[base_price]" min="0.1" step="0.01" value="{{old('config.value', $offer->config['base_price'])}}">
         <br>
-        <label for="start_at">Start at:</label>
-        <input type="datetime-local" id="start_at" name="start_at" value="{{old('name', $offer->start_at)}}">
+        <label for="config[start_at]">Start at:</label>
+        <input type="datetime-local" id="start_at" name="config[start_at]" value="{{old('config.start_at', $offer->config['start_at'])}}">
         <br>
-        <label for="end_at">End at:</label>
-        <input type="datetime-local" id="end_at" name="end_at" value="{{old('name', $offer->end_at)}}">
+        <label for="config[end_at]">End at:</label>
+        <input type="datetime-local" id="end_at" name="config[end_at]" value="{{old('config.end_at', $offer->config['end_at'])}}">
         <br>
-        <label for="percent">Percent:</label>
-        <input type="number" id="percent" name="percent" min="0" max="50" value="{{old('name', $offer->percent)}}">
+        <label for="config[percent]">Percent:</label>
+        <input type="number" id="percent" name="config[percent]" min="0" max="50" value="{{old('config.percent', $offer->config['percent'])}}">
         <br>
         <label for="count">Count:</label>
         <input type="number" id="count" name="count" value="{{old('name', $offer->count)}}">
         <br>
-
+        <label for="token">Token:</label>
+        <input type="string" id="token" name="token" value="{{old('token', $offer->token)}}">
+        <br>
         <button type="submit">Update</butto>
     </form>
 

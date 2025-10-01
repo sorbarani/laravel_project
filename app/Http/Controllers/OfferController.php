@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Offer;
+use Illuminate\Support\Str;
 
 class OfferController extends Controller
 {
@@ -37,18 +38,25 @@ class OfferController extends Controller
     public function store(Request $request)
     {
         //
-        $validate = $request->validate([
+        $validated = $request->validate([
             'name'  => 'required|string|min:1|max:255',
-            'value' => 'required|integer',
-            'base_price' => 'required|numeric|min:0',
-            'start_at' => 'required|date',
-            'end_at' => 'required|date',
-            'percent' => 'required|integer',
+            'config.value' => 'required|integer',
+            'config.base_price' => 'required|numeric|min:0',
+            'config.start_at' => 'required|date',
+            'config.end_at' => 'required|date',
+            'config.percent' => 'required|integer',
             'count' => 'required|integer',
+            'token' => 'string|max:255'
         ]);
 
-        Offer::create($validate);    
-        
+        // Offer::create($validate);   
+        Offer::create([
+            'name' => $validated['name'],
+            'config' => $validated['config'],
+            'count' => $validated['count'],
+            'token' => $validated['token']
+        ]); 
+
         return redirect()->route('offers.index')->with('success', 'Offer created successfully.');
     }
 
@@ -83,17 +91,23 @@ class OfferController extends Controller
      */
     public function update(Request $request, Offer $offer)
     {
-        $validate = $request->validate([
+        $validated = $request->validate([
             'name'  => 'required|string|min:1|max:255',
-            'value' => 'required|integer',
-            'base_price' => 'required|numeric|min:0',
-            'start_at' => 'required|date',
-            'end_at' => 'required|date',
-            'percent' => 'required|integer',
+            'config.value' => 'required|integer',
+            'config.base_price' => 'required|numeric|min:0',
+            'config.start_at' => 'required|date',
+            'config.end_at' => 'required|date',
+            'config.percent' => 'required|integer',
             'count' => 'required|integer',
+            'token' => 'string|max:255',
         ]);
 
-        $offer->update($validate);
+        $offer->update([
+            'name' => $validated['name'],
+            'config' => $validated['config'],
+            'count' => $validated['count'],
+            'token' => $validated['token']
+        ]);
 
         return redirect()->route('offers.index')->with('success', 'Offer updated successfully');
     }
