@@ -99,11 +99,10 @@ class OrderController extends Controller
     public function set_offer(Order $order, Request $request)
     {
         $offer = Offer::where('id', $request->offer)->first();
-        // dd( $order);
 
         $order->update([
-            'offer_amount' => $offer->value,
-            'total_amount' => $order->total_amount - $offer->value,
+            'offer_amount' => $offer->config['value'],
+            'total_amount' => $order->total_amount - $offer->config['value'],
         ]);
 
         return redirect()->route('orders.index')->with('success', 'Offer set successfully.');
