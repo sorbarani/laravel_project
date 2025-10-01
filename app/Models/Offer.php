@@ -12,16 +12,13 @@ class Offer extends Model
     use SoftDeletes;
 
     protected $fillable =[
-        'id', 
         'name',
-        'value',
-        'base_price', 
-        'start_at',
-        'end_at',
-        'percent',
+        'config',
         'count',
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'token'
+    ];
+
+    protected $casts = [
+        'config' => 'array',
     ];
 }
