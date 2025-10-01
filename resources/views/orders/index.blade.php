@@ -53,6 +53,9 @@
                     <button type="submit">Set Offer </button>
                 </td>
             </form>
+            <td>
+                <a href="{{route('orders.show', $order->id)}}">Show</a>
+            </td>
         </tr>
         @endforeach
     </table>

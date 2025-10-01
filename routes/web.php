@@ -46,6 +46,7 @@ Route::get('/offers/{offer}', [OfferController::class, 'destroy'])->name('offers
 //Orders Routes
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::post('/orders/{product}', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 Route::post('/orders/{order}/offer', [OrderController::class, 'set_offer'])->name('orders.setoffer');
 
 /* End */
