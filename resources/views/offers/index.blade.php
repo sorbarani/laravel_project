@@ -31,7 +31,7 @@
             <td>{{$offer->config['start_at']?? '-'}}</td>
             <td>{{$offer->config['end_at']?? '-'}}</td>
             <td>{{$offer->config['percent']?? '-'}}</td>
-            <td>{{$offer->count}}</td>
+            <td>{{$offer->count ?? '-'}}</td>
             <td>{{$offer->token}}</td>
             <td><a href="{{route('offers.destroy', $offer->id)}}">Delete</a></td>
             <td><a href="{{route('offers.edit', $offer->id)}}">Update</a></td>
