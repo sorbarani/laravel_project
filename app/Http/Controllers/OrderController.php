@@ -19,6 +19,49 @@ class OrderController extends Controller
         return $quantity * $price;
     }
 
+    public function check_offer_time($offer)
+    {
+        if($offer->config['start_at'] && $offer->config['end_at']){
+
+            $startAt = Carbon::createFromFormat('Y-m-d\TH:i', $offer->config['start_at']);
+            $endAt   = Carbon::createFromFormat('Y-m-d\TH:i',$offer->config['end_at']);
+
+            $now = Carbon::now();
+
+            if($startAt->greaterThan($now))
+            {
+                return false;
+            }
+            if($endAt->lessThan($now))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function check_offer_count($offer)
+    {
+        if($offer->count === null)
+        {
+            return true;
+        }
+        else
+        {
+            if($offer->count > 0)
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+    }
+
     public function create_order($user_id)
     {
         //This function create an order when user hasn't got an order in table.
@@ -100,46 +143,26 @@ class OrderController extends Controller
     public function set_offer(Order $order, Request $request)
     {
         $offer = Offer::where('id', $request->offer)->first();
-
-        // This condition check existence of time.
-        // If there are we must check they are in valid period before offer.
-        // If they are both null we set offer.
-        if($offer->config['start_at'] && $offer->config['end_at']){
-
-            $startAt = Carbon::createFromFormat('Y-m-d\TH:i', $offer->config['start_at']);
-            $endAt   = Carbon::createFromFormat('Y-m-d\TH:i',$offer->config['end_at']);
-
-            $now = Carbon::now();
-
-            if($startAt->greaterThan($now))
-            {
-                return redirect()->back()->withErrors("Offer for the future.");
-            }
-            if($endAt->lessThan($now))
-            {
-                return redirect()->back()->withErrors("Offer was expire.");
-            }
-            else
-            {
-                $order->update([
-                    'offer_amount' => $offer->config['value'],
-                    'total_amount' => $order->total_amount - $offer->config['value'],
-                ]);
-
-                return redirect()->route('orders.index')->with('success', 'Offer set successfully.');  
-            }
-        }
-        else
+        
+        if($this->check_offer_count($offer) && $this->check_offer_time($offer))
         {
+            echo "Hello";
             $order->update([
                 'offer_amount' => $offer->config['value'],
                 'total_amount' => $order->total_amount - $offer->config['value'],
             ]);
 
+            if($offer->count !== null){
+                $offer->update([
+                    'count' => $offer->count - 1,
+                ]);
+            }
+
             return redirect()->route('orders.index')->with('success', 'Offer set successfully.');
         }
-
-
+        else{
+            return redirect()->route('orders.index')->withErrors(['offer' => "Can't set the offer"]);
+        }
     }
 
     //CRUD Functions
