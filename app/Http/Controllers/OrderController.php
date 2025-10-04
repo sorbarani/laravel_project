@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Offer;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Http\Controllers\OrderProductController;
 
 class OrderController extends Controller
@@ -100,12 +101,45 @@ class OrderController extends Controller
     {
         $offer = Offer::where('id', $request->offer)->first();
 
-        $order->update([
-            'offer_amount' => $offer->config['value'],
-            'total_amount' => $order->total_amount - $offer->config['value'],
-        ]);
+        // This condition check existence of time.
+        // If there are we must check they are in valid period before offer.
+        // If they are both null we set offer.
+        if($offer->config['start_at'] && $offer->config['end_at']){
 
-        return redirect()->route('orders.index')->with('success', 'Offer set successfully.');
+            $startAt = Carbon::createFromFormat('Y-m-d\TH:i', $offer->config['start_at']);
+            $endAt   = Carbon::createFromFormat('Y-m-d\TH:i',$offer->config['end_at']);
+
+            $now = Carbon::now();
+
+            if($startAt->greaterThan($now))
+            {
+                return redirect()->back()->withErrors("Offer for the future.");
+            }
+            if($endAt->lessThan($now))
+            {
+                return redirect()->back()->withErrors("Offer was expire.");
+            }
+            else
+            {
+                $order->update([
+                    'offer_amount' => $offer->config['value'],
+                    'total_amount' => $order->total_amount - $offer->config['value'],
+                ]);
+
+                return redirect()->route('orders.index')->with('success', 'Offer set successfully.');  
+            }
+        }
+        else
+        {
+            $order->update([
+                'offer_amount' => $offer->config['value'],
+                'total_amount' => $order->total_amount - $offer->config['value'],
+            ]);
+
+            return redirect()->route('orders.index')->with('success', 'Offer set successfully.');
+        }
+
+
     }
 
     //CRUD Functions

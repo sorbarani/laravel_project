@@ -8,6 +8,16 @@
 <body>
     <h1 style="color:blueviolet;">All Orders</h1>
     <hr>
+    @if ($errors->any())
+    <div style="color:red" class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li style="color: red;">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <table border="1" cellpadding="5">
         <tr>
             <th>ID</th>
