@@ -45,7 +45,7 @@ class OfferController extends Controller
             'config.start_at' => 'nullable|date|required_with:config.end_at',
             'config.end_at' => 'nullable|date|required_with:config.start_at|after_or_equal:config.start_at',
             'config.percent' => 'required|integer',
-            'count' => 'required|integer',
+            'count' => 'nullable|integer|min:1',
             'token' => 'string|max:255'
         ]);
 
@@ -98,7 +98,7 @@ class OfferController extends Controller
             'config.start_at' => 'nullable|date|required_with:config.end_at',
             'config.end_at' => 'nullable|date|required_with:config.start_at|after_or_equal:config.start_at',
             'config.percent' => 'required|integer',
-            'count' => 'required|integer',
+            'count' => 'nullable|integer|min:1',
             'token' => 'string|max:255',
         ]);
 
