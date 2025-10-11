@@ -21,8 +21,9 @@
     </div>
     @endif
 
-    <form action="{{route('offers.update', $offer->id)}}" method="post">
+    <form action="{{route('offers.update', $offer->id)}}" method="POST">
         @CSRF
+        @method('PATCH')
         <lablel for="name">Name of offer:</lablel>
         <input type="text" id="name" name="name" value="{{old('name', $offer->name)}}" required>
         <br>

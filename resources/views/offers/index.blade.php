@@ -33,12 +33,19 @@
             <td>{{$offer->config['percent']?? '-'}}</td>
             <td>{{$offer->count}}</td>
             <td>{{$offer->token}}</td>
-            <td><a href="{{route('offers.destroy', $offer->id)}}">Delete</a></td>
-            <td><a href="{{route('offers.edit', $offer->id)}}">Update</a></td>
+            <form action="{{route('offers.destroy', $offer->id)}}" method="POST">
+                @CSRF
+                @method("DELETE")
+                <td>
+                    <button type="submit">Delete</button>
+                </td>
+            </form>
+            <td><a href="{{route('offers.edit', $offer->id)}}"><button type="submit">Update</button></a></td>
         </tr>
         @endforeach
     </table>
-    <hr><hr>
+    <hr>
+    <hr>
     <p1>If you want to set new offer click <a href="{{route('offers.create')}}">here</a>.</p1>
 </body>
 
