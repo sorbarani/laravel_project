@@ -17,7 +17,7 @@ class CreateOrderProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('sub_produc')->nullable();
+            $table->unsignedBigInteger('sub_product')->nullable();
             $table->unsignedBigInteger('offer_id')->nullable();
             $table->bigInteger('offer_id_value')->default(0)->comment('this value came from offer_id value');
             $table->bigInteger('offer_on_product')->default(0);
