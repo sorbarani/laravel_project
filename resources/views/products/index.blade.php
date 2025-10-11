@@ -17,7 +17,7 @@
         </ul>
     </div>
     @endif
-    
+
     <table border="1" cellpadding="5">
         <tr>
             <th>ID</th>
@@ -49,6 +49,7 @@
         </tr>
         @endforeach
     </table>
+    <p><a href="{{route('products.create')}}">Submit new product.</a></p>
     {{ $products->links() }}
 </body>
 
