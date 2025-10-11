@@ -119,7 +119,7 @@ class OrderController extends Controller
     public function store(Request $request, Product $product)
     {
         //This function acts like an entry point for user orders.
-        //When a user register an product we create an order and add product to order_product table.
+        //When a user register an product we create an order and add product to order_products table.
         //If the order already created we just update it and their products in the related order.
 
         $user_id = 2;
